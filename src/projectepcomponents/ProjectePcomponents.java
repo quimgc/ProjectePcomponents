@@ -28,6 +28,8 @@ public class ProjectePcomponents {
         double preu = 0.0;
 
         boolean obsolet = false;
+        
+        boolean omplit=false;
 
         String descripcio = "";
 
