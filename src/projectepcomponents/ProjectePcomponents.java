@@ -29,7 +29,7 @@ public class ProjectePcomponents {
 
         boolean obsolet = false;
         
-        boolean omplit=true;
+        boolean omplit=false;
 
         String descripcio = "";
 
