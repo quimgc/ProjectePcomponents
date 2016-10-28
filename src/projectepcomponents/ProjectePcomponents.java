@@ -18,53 +18,111 @@ public class ProjectePcomponents {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-   
- String nomComponent = null;
+
+        String nomComponent = null;
 
         String fabricant = null;
-
-        int anyDellançament = 0;
+        int dia = 1;
+        int mes = 1;
+        int any = 1960;
 
         double preu = 0.0;
 
+        char respostaobsolet;
+
         boolean obsolet = false;
-        
-        boolean omplit=false;
+
+        boolean omplit = false;
 
         String descripcio = "";
 
-        int opcio;
+        int opcio = 0;
 
         Scanner entrada = new Scanner(System.in);
+        Scanner entNum = new Scanner(System.in);
+
         System.out.println("Benvinguts al projecte de Quim González Colat,\npodreu consultat tots els diferents components que formen un ordenador amb les seves característiques!!");
 
         do {
             System.out.println("Escolleix una opció del programa: ");
             System.out.println("1 - Introdueix un nou producte.");
             System.out.println("2 - Modificar un producte.");
-            System.out.println("3 - Esborrar producte.");
-            System.out.println("4 - Sortir del programa.");
-            opcio = entrada.nextInt();
-            
-            
-        switch (opcio) {
-            case 1:
-                System.out.println("Introdueix");
-                break;
-            case 2: System.out.println("Modificar");
-                break;
-            case 3: System.out.println("Esborrar");
-                break;
-            case 4: System.out.println("Sortir del programa");
-                break;
-            default: System.out.println("No has introduït cap opció correcta.");
-                
-        }
+            System.out.println("3 - Mostrar un producte.");
+            System.out.println("4 - Esborrar producte.");
+            System.out.println("5 - Sortir del programa.");
+            opcio = entNum.nextInt();
 
-        } while (opcio==0 || opcio==5);
+            switch (opcio) {
+                case 1:
+                    if (!omplit) {
+                        System.out.print("Introdueix el nom del component: \n");
+                        nomComponent = entrada.next();
+                        // nomComponent = entrada.next();
+                        System.out.println("Introdueix el fabricant: ");
+                        fabricant = entrada.next();
 
+                        do {
+                            System.out.println("Introdueix la data de llançament: ");
+                            dia = entNum.nextInt();
+                            mes = entNum.nextInt();
+                            any = entNum.nextInt();
+
+                        } while (dia < 1 || dia > 31 || mes < 1 || mes > 12 || any < 1960 || any > 2017);
+
+                        System.out.println("\nIntrodueix el preu: ");
+                        preu = entNum.nextDouble();
+
+                        do {
+                            System.out.println("El producte està obsolet? S/N");
+                            respostaobsolet = entrada.next().toUpperCase().charAt(0);
+                        } while (respostaobsolet != 'S' && respostaobsolet != 'N');
+                        {
+                            obsolet = true;
+                        }
+                        omplit = true;
+                    } else {
+                        System.out.println("El producte ja està introduït!!\n");
+                    }
+
+                    break;
+
+                case 2:
+                    System.out.println("Modificar");
+                    break;
+                case 3:
+                    if(!omplit){
+                        System.out.println("No hi ha cap producte!\n");
+                    } else {
+                    System.out.println("\nEl nom del component és: "+ nomComponent);
+                    System.out.println("El fabricant és: "+ fabricant);
+                    System.out.println("La data de llançament és: "+dia+"/"+mes+"/"+any);
+                    System.out.println("El preu és: " +preu+"€");
+                    if(obsolet){
+                        System.out.println("El producte està obsolet.\n");
+                    } else System.out.println("El producte no està obsolet. \n");
+                    }
+                    break;
+                case 4:
+                 
+                    
+                    if(!omplit){
+                        System.out.println("No hi ha cap producte per esborrar! \n");
+                    }
+                    else {
+                    omplit=false;
+                        System.out.println("El producte ha estat esborrat.\n");
+                    }
+                    break;
+                case 5:
+                    System.out.println("Sortint del programa...");
+                    break;
+                default:
+                    System.out.println("No has introduït cap opció correcta.");
+
+            }
+
+        } while (opcio != 5);
 
     }
 
 }
-
