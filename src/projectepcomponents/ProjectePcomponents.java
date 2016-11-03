@@ -29,6 +29,7 @@ public class ProjectePcomponents {
         double preu = 0.0;
 
         char respostaobsolet;
+        char resposta;
 
         boolean obsolet = false;
 
@@ -56,13 +57,13 @@ public class ProjectePcomponents {
                 case 1:
                     if (!omplit) {
                         System.out.print("Introdueix el nom del component: \n");
-                        nomComponent = entrada.next();
-                        // nomComponent = entrada.next();
+                        nomComponent = entrada.nextLine();
+                        // nomComponent = entrada.nextLine();
                         System.out.println("Introdueix el fabricant: ");
-                        fabricant = entrada.next();
+                        fabricant = entrada.nextLine();
 
                         do {
-                            System.out.println("Introdueix la data de llançament: ");
+                            System.out.println("Introdueix la data de llançament(dia/mes/any): ");
                             dia = entNum.nextInt();
                             mes = entNum.nextInt();
                             any = entNum.nextInt();
@@ -74,9 +75,9 @@ public class ProjectePcomponents {
 
                         do {
                             System.out.println("El producte està obsolet? S/N");
-                            respostaobsolet = entrada.next().toUpperCase().charAt(0);
+                            respostaobsolet = entrada.nextLine().toUpperCase().charAt(0);
                         } while (respostaobsolet != 'S' && respostaobsolet != 'N');
-                        {
+                        if (respostaobsolet == 'S') {
                             obsolet = true;
                         }
                         omplit = true;
@@ -87,29 +88,89 @@ public class ProjectePcomponents {
                     break;
 
                 case 2:
-                    System.out.println("Modificar");
+                    if (!omplit) {
+
+                        System.out.println("\nNo hi ha productes per modificar!\n");
+
+                    } else {
+                        do {
+                            System.out.println("Vols modificar el nom? S/N");
+                            resposta = entrada.nextLine().toUpperCase().charAt(0);
+                            if (resposta == 'S') {
+                                System.out.println("Introdueix un nou nom del producte: ");
+                                nomComponent = entrada.nextLine();
+                            }
+                        } while (resposta != 'S' && resposta != 'N');
+
+                        do {
+                            System.out.println("Vols modificar el nom del fabricant? S/N");
+                            resposta = entrada.nextLine().toUpperCase().charAt(0);
+                            if (resposta == 'S') {
+                                System.out.println("Introdueix un nou nom del fabricant: ");
+                                fabricant = entrada.nextLine();
+                            }
+                        } while (resposta != 'S' && resposta != 'N');
+
+                        do {
+                            System.out.println("Vols modificar la data de llançament? S/N");
+                            resposta = entrada.nextLine().toUpperCase().charAt(0);
+                            if (resposta == 'S') {
+                                do {
+                                    System.out.println("Introdueix la data de llançament (dia/mes/any): ");
+                                    dia = entNum.nextInt();
+                                    mes = entNum.nextInt();
+                                    any = entNum.nextInt();
+
+                                } while (dia < 1 || dia > 31 || mes < 1 || mes > 12 || any < 1960 || any > 2017);
+                            }
+                        } while (resposta != 'S' && resposta != 'N');
+
+                        do {
+                            System.out.println("Vols modificar el preu del producte?  S/N");
+                            resposta = entrada.nextLine().toUpperCase().charAt(0);
+                            if (resposta == 'S') {
+                                System.out.println("Introdueix un nou preu al producte:  ");
+                                preu = entNum.nextDouble();
+                            }
+                        } while (resposta != 'S' && resposta != 'N');
+
+                        do {
+                            System.out.println("Vols modificar si el producte està obsolet? S/N");
+                            resposta = entrada.nextLine().toUpperCase().charAt(0);
+                            if (resposta == 'S') {
+                                do {
+                                    System.out.println("El producte està obsolet? S/N");
+                                    respostaobsolet = entrada.nextLine().toUpperCase().charAt(0);
+                                } while (respostaobsolet != 'S' && respostaobsolet != 'N');
+                                {
+                                    obsolet = true;
+                                }
+                            }
+                        } while (resposta != 'S' && resposta != 'N');
+
+                    }
                     break;
                 case 3:
-                    if(!omplit){
+                    if (!omplit) {
                         System.out.println("No hi ha cap producte!\n");
                     } else {
-                    System.out.println("\nEl nom del component és: "+ nomComponent);
-                    System.out.println("El fabricant és: "+ fabricant);
-                    System.out.println("La data de llançament és: "+dia+"/"+mes+"/"+any);
-                    System.out.println("El preu és: " +preu+"€");
-                    if(obsolet){
-                        System.out.println("El producte està obsolet.\n");
-                    } else System.out.println("El producte no està obsolet. \n");
+                        System.out.println("\nEl nom del component és: " + nomComponent);
+                        System.out.println("El fabricant és: " + fabricant);
+                        System.out.println("La data de llançament és: " + dia + "/" + mes + "/" + any);
+                        System.out.println("El preu és: " + preu + "€");
+                        if (obsolet) {
+                            System.out.println("El producte està obsolet.\n");
+                        } else {
+                            System.out.println("El producte no està obsolet. \n");
+                        }
                     }
                     break;
                 case 4:
-                 
-                    
-                    if(!omplit){
+
+                    if (!omplit) {
                         System.out.println("No hi ha cap producte per esborrar! \n");
-                    }
-                    else {
-                    omplit=false;
+                    } else {
+                        omplit = false;
                         System.out.println("El producte ha estat esborrat.\n");
                     }
                     break;
