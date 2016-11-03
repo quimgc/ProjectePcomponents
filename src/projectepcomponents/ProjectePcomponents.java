@@ -50,7 +50,8 @@ public class ProjectePcomponents {
             System.out.println("2 - Modificar un producte.");
             System.out.println("3 - Mostrar un producte.");
             System.out.println("4 - Esborrar producte.");
-            System.out.println("5 - Sortir del programa.");
+            System.out.println("5 - Recuperar producte.");
+            System.out.println("6 - Sortir del programa.");
             opcio = entNum.nextInt();
 
             switch (opcio) {
@@ -148,8 +149,6 @@ public class ProjectePcomponents {
                             }
                         } while (resposta != 'S' && resposta != 'N');
 
-                        
-                        
                     }
                     break;
                 case 3:
@@ -177,14 +176,36 @@ public class ProjectePcomponents {
                     }
                     break;
                 case 5:
-                    System.out.println("Sortint del programa...");
+
+                    do {
+                        System.out.println("Vols modificar el nom? S/N");
+                        resposta = entrada.nextLine().toUpperCase().charAt(0);
+                        if (resposta == 'S') {
+                            omplit = true; //serveix per recuperar el producte.
+                            System.out.println("\nRecuperació del producte: \n");
+                            System.out.println("\nEl nom del component és: " + nomComponent);
+                            System.out.println("El fabricant és: " + fabricant);
+                            System.out.println("La data de llançament és: " + dia + "/" + mes + "/" + any);
+                            System.out.println("El preu és: " + preu + "€");
+                            if (obsolet) {
+                                System.out.println("El producte està obsolet.\n");
+                            } else {
+                                System.out.println("El producte no està obsolet. \n");
+                            }
+
+                        }
+                    } while (resposta != 'S' && resposta != 'N');
+
+                    break;
+                case 6:
+                    System.out.println("\nSortint del programa...");
                     break;
                 default:
-                    System.out.println("No has introduït cap opció correcta.");
+                    System.out.println("No has introduït una opció correcta.");
 
             }
 
-        } while (opcio != 5);
+        } while (opcio != 6);
 
     }
 
