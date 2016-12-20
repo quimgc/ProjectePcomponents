@@ -45,7 +45,7 @@ public class ProjectePcomponents {
         System.out.println("Benvinguts al projecte de Quim González Colat,\npodreu consultat tots els diferents components que formen un ordenador amb les seves característiques!!");
 
         do {
-            System.out.println("Escolleix una opció del programa: ");
+            System.out.println("Escolleix una opció del programa: \n");
             System.out.println("1 - Introdueix un nou producte.");
             System.out.println("2 - Modificar un producte.");
             System.out.println("3 - Mostrar un producte.");
@@ -178,7 +178,7 @@ public class ProjectePcomponents {
                 case 5:
 
                     do {
-                        System.out.println("Vols modificar el nom? S/N");
+                        System.out.println("Vols recuperar el component esborrat? S/N");
                         resposta = entrada.nextLine().toUpperCase().charAt(0);
                         if (resposta == 'S') {
                             omplit = true; //serveix per recuperar el producte.
