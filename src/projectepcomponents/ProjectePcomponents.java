@@ -13,34 +13,59 @@ import java.util.Scanner;
  */
 public class ProjectePcomponents {
 
+    private static final int MAXCOMPONENTS = 2;
+    private static Components[] array = new Components[MAXCOMPONENTS];
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
 
-        String nomComponent = null;
+        /*
+        nomComponent [] arrayComponents; Així se declara el velctor per guardar informació dels Components.
+        nomComponent [] vectorComponents=new nomComponent [mida];
+        NOTA: Recomanable posar la mida del vector en una CONSTANT;
+        
+        
+       Per declar un nou component s'hauria de fer:
+                Components kingston=new Components();
 
+     
+           Components[] array=new Components[MAXCOMPONENTS];
+        array[0]=new Components();
+        array[0].setNomComponent("Asus");
+        array[0].setDescripcio("hola hola q tal");
+        array[0].setPreu(245);
+        array[0].setOmplit(true);
+        System.out.println(array[0].toString());
+        for (int i = 0; i < array.length; i++) {
+            array[i]=new Components();
+        }
+        System.exit(0);
+         */
+        //Vector on guardarem la informacio dels components;
+        Scanner entrada = new Scanner(System.in);
+        Scanner entNum = new Scanner(System.in);
+
+        for (int i = 0; i < array.length; i++) {
+            array[i] = new Components();
+            array[i].setOmplit(false);
+        }
+
+        /*Això quan acabi l'array s'ha d'esborrar, ja que utilitzarà les variables del fitxer components.java*/
+        String nomComponent = null;
         String fabricant = null;
         int dia = 1;
         int mes = 1;
         int any = 1960;
-
         double preu = 0.0;
-
         char respostaobsolet;
         char resposta;
-
         boolean obsolet = false;
-
         boolean omplit = false;
-
         String descripcio = "";
-
         int opcio = 0;
-
-        Scanner entrada = new Scanner(System.in);
-        Scanner entNum = new Scanner(System.in);
 
         System.out.println("Benvinguts al projecte de Quim González Colat,\npodreu consultat tots els diferents components que formen un ordenador amb les seves característiques!!");
 
@@ -56,10 +81,43 @@ public class ProjectePcomponents {
 
             switch (opcio) {
                 case 1:
-                    if (!omplit) {
+                    int i = 0;
+                    //aixo fa que el for dins del seu cos no tingui instruccions.
+                    for (i = 0; i < array.length && array[i].isOmplit(); i++);
+                    if (i < array.length) {
+                        //s'ha trobat una casella buida.
+
+                        System.out.println("\nNom:");
+                        array[i].setNomComponent(entrada.skip("[\r\n]*").nextLine());
+                        System.out.println("\nFabricant:");
+                        array[i].setFabricant(entrada.skip("[\r\n]*").nextLine());
+                        System.out.println("\nData de llançament (dia/mes/any)");
+                        System.out.println("\nDia:");
+                        array[i].setDia(entNum.skip("[\r\n]*").nextInt());
+                        System.out.println("\nMes:");
+                        array[i].setMes(entNum.skip("[\r\n]*").nextInt());
+                        System.out.println("\nAny:");
+                        array[i].setAny(entNum.skip("[\r\n]*").nextInt());
+                        System.out.println("\nPreu:");
+                        array[i].setPreu(entNum.skip("[\r\n]*").nextInt());
+
+                        do {
+                            System.out.println("\nEl producte està obsolet? S/N");
+                            respostaobsolet = entrada.skip("[\r\n]*").nextLine().toUpperCase().charAt(0);
+                        } while (respostaobsolet != 'S' && respostaobsolet != 'N');
+                        if (respostaobsolet == 'S') {
+                            array[i].setObsolet(true);
+                            array[i].setOmplit(true);
+                        }
+                    } else {
+                        System.out.println("no hi ha espai per nous components.");
+                    }
+
+                    break;
+                /* if (!omplit) {
                         System.out.print("Introdueix el nom del component: \n");
-                        nomComponent = entrada.nextLine();
-                        // nomComponent = entrada.nextLine();
+                         //array[i].setNomComponent(entrada.skip("[\r\m]*").nextLine());
+                         // nomComponent = entrada.nextLine();
                         System.out.println("Introdueix el fabricant: ");
                         fabricant = entrada.nextLine();
 
@@ -87,8 +145,49 @@ public class ProjectePcomponents {
                     }
 
                     break;
+                 */
 
                 case 2:
+                    resposta='N';
+                    for (i = 0; i < array.length; i++) {
+                        if (array[i].isOmplit()) {
+                            System.out.format("\n Component %d\n:", array[i].getNomComponent());
+                            do {
+                                System.out.println("Vols modifcar aquest component?");
+                                resposta = entrada.skip("[\r\n]*").nextLine().toUpperCase().charAt(0);
+                            } while (resposta != 'S' && resposta != 'N');
+                            if (resposta == 'S') {
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if(resposta=='S'){
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
                     if (!omplit) {
 
                         System.out.println("\nNo hi ha productes per modificar!\n");
@@ -152,6 +251,16 @@ public class ProjectePcomponents {
                     }
                     break;
                 case 3:
+                    /*temporal*/
+                    i = 0;
+                    System.out.println(array[i].getNomComponent());
+
+                    for (i = 0; i < array.length; i++) {
+                        if (array[i].isOmplit()) {
+
+                        }
+                    }
+
                     if (!omplit) {
                         System.out.println("No hi ha cap producte!\n");
                     } else {
