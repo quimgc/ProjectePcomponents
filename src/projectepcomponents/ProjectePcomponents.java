@@ -22,28 +22,7 @@ public class ProjectePcomponents {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        /*
-        nomComponent [] arrayComponents; Així se declara el velctor per guardar informació dels Components.
-        nomComponent [] vectorComponents=new nomComponent [mida];
-        NOTA: Recomanable posar la mida del vector en una CONSTANT;
-        
-        
-       Per declar un nou component s'hauria de fer:
-                Components kingston=new Components();
-
-     
-           Components[] array=new Components[MAXCOMPONENTS];
-        array[0]=new Components();
-        array[0].setNomComponent("Asus");
-        array[0].setDescripcio("hola hola q tal");
-        array[0].setPreu(245);
-        array[0].setOmplit(true);
-        System.out.println(array[0].toString());
-        for (int i = 0; i < array.length; i++) {
-            array[i]=new Components();
-        }
-        System.exit(0);
-         */
+       
         //Vector on guardarem la informacio dels components;
         Scanner entrada = new Scanner(System.in);
         Scanner entNum = new Scanner(System.in);
@@ -54,17 +33,10 @@ public class ProjectePcomponents {
         }
 
         /*Això quan acabi l'array s'ha d'esborrar, ja que utilitzarà les variables del fitxer components.java*/
-        String nomComponent = null;
-        String fabricant = null;
-        int dia = 1;
-        int mes = 1;
-        int any = 1960;
-        double preu = 0.0;
+     
+    
         char respostaobsolet;
-        char resposta;
-        boolean obsolet = false;
-        boolean omplit = false;
-        String descripcio = "";
+        char resposta = 'N';
         int opcio = 0;
 
         System.out.println("Benvinguts al projecte de Quim González Colat,\npodreu consultat tots els diferents components que formen un ordenador amb les seves característiques!!");
@@ -87,19 +59,18 @@ public class ProjectePcomponents {
                     if (i < array.length) {
                         //s'ha trobat una casella buida.
 
-                        System.out.println("\nNom:");
+                        System.out.println("\nNom component:");
                         array[i].setNomComponent(entrada.skip("[\r\n]*").nextLine());
                         System.out.println("\nFabricant:");
                         array[i].setFabricant(entrada.skip("[\r\n]*").nextLine());
-                        System.out.println("\nData de llançament (dia/mes/any)");
-                        System.out.println("\nDia:");
-                        array[i].setDia(entNum.skip("[\r\n]*").nextInt());
-                        System.out.println("\nMes:");
-                        array[i].setMes(entNum.skip("[\r\n]*").nextInt());
-                        System.out.println("\nAny:");
-                        array[i].setAny(entNum.skip("[\r\n]*").nextInt());
-                        System.out.println("\nPreu:");
-                        array[i].setPreu(entNum.skip("[\r\n]*").nextInt());
+                       do {
+                                    System.out.println("Introdueix la data de llançament (dia/mes/any): ");
+                                    array[i].setDia(entNum.nextInt());
+                                    array[i].setMes(entNum.nextInt());
+                                    array[i].setAny(entNum.nextInt());
+                              
+
+                                }while(!dataCorrecta(array[i].getDia(),array[i].getMes(),array[i].getAny()));
 
                         do {
                             System.out.println("\nEl producte està obsolet? S/N");
@@ -107,133 +78,84 @@ public class ProjectePcomponents {
                         } while (respostaobsolet != 'S' && respostaobsolet != 'N');
                         if (respostaobsolet == 'S') {
                             array[i].setObsolet(true);
-                            array[i].setOmplit(true);
+                            
+                        }else{
+                            array[i].setObsolet(false);
+                        
                         }
+                        array[i].setOmplit(true);
                     } else {
                         System.out.println("no hi ha espai per nous components.");
                     }
 
                     break;
-                /* if (!omplit) {
-                        System.out.print("Introdueix el nom del component: \n");
-                         //array[i].setNomComponent(entrada.skip("[\r\m]*").nextLine());
-                         // nomComponent = entrada.nextLine();
-                        System.out.println("Introdueix el fabricant: ");
-                        fabricant = entrada.nextLine();
-
-                        do {
-                            System.out.println("Introdueix la data de llançament(dia/mes/any): ");
-                            dia = entNum.nextInt();
-                            mes = entNum.nextInt();
-                            any = entNum.nextInt();
-
-                        } while (dia < 1 || dia > 31 || mes < 1 || mes > 12 || any < 1960 || any > 2017);
-
-                        System.out.println("\nIntrodueix el preu: ");
-                        preu = entNum.nextDouble();
-
-                        do {
-                            System.out.println("El producte està obsolet? S/N");
-                            respostaobsolet = entrada.nextLine().toUpperCase().charAt(0);
-                        } while (respostaobsolet != 'S' && respostaobsolet != 'N');
-                        if (respostaobsolet == 'S') {
-                            obsolet = true;
-                        }
-                        omplit = true;
-                    } else {
-                        System.out.println("El producte ja està introduït!!\n");
-                    }
-
-                    break;
-                 */
-
+                
                 case 2:
-                    resposta='N';
-                    for (i = 0; i < array.length; i++) {
+                    resposta = 'N';
+                
+                    for (i = 0; i < array.length  && resposta != 'S' && resposta != 'F'; i++) {
                         if (array[i].isOmplit()) {
-                            System.out.format("\n Component %d\n:", array[i].getNomComponent());
+                            System.out.format("\n Component: %s\n", array[i].getNomComponent());
                             do {
-                                System.out.println("Vols modifcar aquest component?");
+                                System.out.println("Vols modifcar aquest component o finalitzar la busqueda?: (S per modificar N per continuar F per finalitzar)");
                                 resposta = entrada.skip("[\r\n]*").nextLine().toUpperCase().charAt(0);
-                            } while (resposta != 'S' && resposta != 'N');
+                            } while (resposta != 'S' && resposta != 'N' && resposta != 'F');
+                        }
                             if (resposta == 'S') {
                                 break;
                             }
-                        }
+                    
                     }
                     
-                    if(resposta=='S'){
-                        
-                    }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
 
-                    if (!omplit) {
+                    if (resposta == 'S') {
 
-                        System.out.println("\nNo hi ha productes per modificar!\n");
-
-                    } else {
                         do {
                             System.out.println("Vols modificar el nom? S/N");
                             resposta = entrada.nextLine().toUpperCase().charAt(0);
                             if (resposta == 'S') {
                                 System.out.println("Introdueix un nou nom del producte: ");
-                                nomComponent = entrada.nextLine();
+                                array[i].setNomComponent(entrada.skip("[\r\n]*").nextLine());
+
                             }
                         } while (resposta != 'S' && resposta != 'N');
-
-                        do {
+                        
+                           do {
                             System.out.println("Vols modificar el nom del fabricant? S/N");
                             resposta = entrada.nextLine().toUpperCase().charAt(0);
                             if (resposta == 'S') {
                                 System.out.println("Introdueix un nou nom del fabricant: ");
-                                fabricant = entrada.nextLine();
+                                 array[i].setFabricant(entrada.skip("[\r\n]*").nextLine());
                             }
                         } while (resposta != 'S' && resposta != 'N');
-
-                        do {
+                           
+                          do {
                             System.out.println("Vols modificar la data de llançament? S/N");
                             resposta = entrada.nextLine().toUpperCase().charAt(0);
                             if (resposta == 'S') {
                                 do {
                                     System.out.println("Introdueix la data de llançament (dia/mes/any): ");
-                                    dia = entNum.nextInt();
-                                    mes = entNum.nextInt();
-                                    any = entNum.nextInt();
+                                    array[i].setDia(entNum.nextInt());
+                                    array[i].setMes(entNum.nextInt());
+                                    array[i].setAny(entNum.nextInt());
+                              
 
-                                } while (dia < 1 || dia > 31 || mes < 1 || mes > 12 || any < 1960 || any > 2017);
+                                }while(!dataCorrecta(array[i].getDia(),array[i].getMes(),array[i].getAny()));
                             }
                         } while (resposta != 'S' && resposta != 'N');
-
-                        do {
+                          
+                          
+                           do {
                             System.out.println("Vols modificar el preu del producte?  S/N");
                             resposta = entrada.nextLine().toUpperCase().charAt(0);
                             if (resposta == 'S') {
                                 System.out.println("Introdueix un nou preu al producte:  ");
-                                preu = entNum.nextDouble();
+                                array[i].setPreu(entNum.nextDouble());
+
                             }
                         } while (resposta != 'S' && resposta != 'N');
-
+                           
+                           
                         do {
                             System.out.println("Vols modificar si el producte està obsolet? S/N");
                             resposta = entrada.nextLine().toUpperCase().charAt(0);
@@ -243,69 +165,101 @@ public class ProjectePcomponents {
                                     respostaobsolet = entrada.nextLine().toUpperCase().charAt(0);
                                 } while (respostaobsolet != 'S' && respostaobsolet != 'N');
                                 {
-                                    obsolet = true;
+                                    array[i].setObsolet(true);
                                 }
                             }
                         } while (resposta != 'S' && resposta != 'N');
-
-                    }
+                        
+                       
+                    }else System.out.println("No hi ha productes per modifciar!!");
+                    
+                    
+                  
                     break;
                 case 3:
-                    /*temporal*/
                     i = 0;
-                    System.out.println(array[i].getNomComponent());
-
+                  
+                     boolean temp=false;
                     for (i = 0; i < array.length; i++) {
-                        if (array[i].isOmplit()) {
-
-                        }
-                    }
-
-                    if (!omplit) {
-                        System.out.println("No hi ha cap producte!\n");
-                    } else {
-                        System.out.println("\nEl nom del component és: " + nomComponent);
-                        System.out.println("El fabricant és: " + fabricant);
-                        System.out.println("La data de llançament és: " + dia + "/" + mes + "/" + any);
-                        System.out.println("El preu és: " + preu + "€");
-                        if (obsolet) {
-                            System.out.println("El producte està obsolet.\n");
-                        } else {
+                        
+                        if (array[i].isOmplit()){
+                             System.out.println("\nEl nom del component és: " + array[i].getNomComponent());
+                             System.out.println("El fabricant és: " + array[i].getFabricant());
+                             System.out.println("La data de llançament és: " + array[i].getDia() + "/" + array[i].getMes() + "/" + array[i].getAny());
+                             System.out.println("El preu és: " + array[i].getPreu() + "€");
+                             if (array[i].isObsolet()) {
+                                 System.out.println("El producte està obsolet.\n");
+                                } else {
                             System.out.println("El producte no està obsolet. \n");
+                             }
+                             temp=true;
+                        }
+                             if (!temp) {
+                   System.out.println("No hi ha cap producte!!!\n");
+                                     break;
                         }
                     }
-                    break;
+                   
+                    
+                  
+                  break;
                 case 4:
+                        
+        Scanner ent = new Scanner(System.in);
+        char siNo = 'N';
+        Components c = null;
+        
+        for (i = 0; i < array.length && siNo != 'F'; i++) {
+            c = array[i];
+            if (c.isOmplit()) {
+                System.out.format("\n%s",c);
+                do {
+                    System.out.println("\nVols borrar el component(S/N) o finalitzar la cerca (F)?:");
+                    siNo = ent.skip("[\r\n]*").nextLine().toUpperCase().charAt(0);
+                } while (siNo != 'S' && siNo != 'N' && siNo != 'F');
+            }
+            if (siNo == 'S') {
+                break;
+            }
+        }
 
-                    if (!omplit) {
-                        System.out.println("No hi ha cap producte per esborrar! \n");
-                    } else {
-                        omplit = false;
-                        System.out.println("El producte ha estat esborrat.\n");
-                    }
+        if (siNo == 'S') {
+            c.setOmplit(false);
+            System.out.println("Component borrat correctament.");
+
+        } else {
+            System.out.println("\nNo s'ha borrat cap component.");
+        }
+                 
                     break;
                 case 5:
-
-                    do {
-                        System.out.println("Vols recuperar el component esborrat? S/N");
-                        resposta = entrada.nextLine().toUpperCase().charAt(0);
-                        if (resposta == 'S') {
-                            omplit = true; //serveix per recuperar el producte.
-                            System.out.println("\nRecuperació del producte: \n");
-                            System.out.println("\nEl nom del component és: " + nomComponent);
-                            System.out.println("El fabricant és: " + fabricant);
-                            System.out.println("La data de llançament és: " + dia + "/" + mes + "/" + any);
-                            System.out.println("El preu és: " + preu + "€");
-                            if (obsolet) {
-                                System.out.println("El producte està obsolet.\n");
-                            } else {
-                                System.out.println("El producte no està obsolet. \n");
-                            }
-
-                        }
-                    } while (resposta != 'S' && resposta != 'N');
-
-                    break;
+                    int cont=0;
+              
+                    
+                   for (i = 0; i < array.length && resposta != 'S' && resposta != 'F'; i++) {
+            if (!array[i].isOmplit()) {
+                System.out.format("\nComponent %d:\n", ++cont);
+                System.out.format("\n%s",array[i].toString());
+                do {
+                    System.out.println("\nVols recuperar el component(S/N) o finalitzar la cerca (F)?:");
+                    resposta = entrada.skip("[\r\n]*").nextLine().toUpperCase().charAt(0); //usem toUpperCase() que traduix el text introduït per l'usuari a majúscules, 
+                    //per tant només haurem de tractar les lletres majúscules
+                } while (resposta != 'S' && resposta != 'N' && resposta != 'F');
+            }
+            if (resposta == 'S') {
+                break;
+            }
+        }
+                   
+                   if (resposta == 'S') {
+            array[i].setOmplit(true);
+            System.out.println("Component recuperat correctament.");
+        } else {
+            if(cont==0) System.out.println("No hi ha components per recuperar.");
+            else System.out.println("Component no recuperat.");
+        }
+             break;
+                 
                 case 6:
                     System.out.println("\nSortint del programa...");
                     break;
@@ -315,6 +269,30 @@ public class ProjectePcomponents {
             }
 
         } while (opcio != 6);
+
+    }
+       public static boolean dataCorrecta(int dia, int mes, int any){
+         int [] mesos={31,28,31,30,31,30,31,31,30,31,30,31};
+        if(mes<1 || mes>12 || dia<1 || dia>31){
+            return false;
+        }
+        if(bixest(any)){
+            mesos[1]=29;
+        }
+        if(dia<=mesos[mes-1]){
+            return true;
+        }
+        return false;
+        
+        }
+             public static boolean bixest(int any) {
+        if (any < 1584) {
+            return false;
+        }
+        if ((any % 400 == 0 || any % 4 == 0) && any % 100 != 0) {
+            return true;
+        }
+        return false;
 
     }
 
